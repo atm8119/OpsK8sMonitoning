@@ -28,6 +28,7 @@ roleRef:
   name: kubelet-metrics-viewer
   apiGroup: rbac.authorization.k8s.io
 EOF 
+
 kubectl apply -f kubelet-access-rbac.yaml
 
 # Expose Kubelet API to VCF Operations (in our case, for simplicity, using NodePort)
@@ -50,6 +51,7 @@ spec:
     # For k3s, you might need to adjust this based on your specific setup
     k8s-app: kubelet
 EOF
+
 kubectl apply -f kubelet-api-nodeport.yaml
 
 # Get Service Account Token to add to VCF Operations
