@@ -55,6 +55,7 @@ spec:
   selector:
     app: prometheus-example-app
 EOF
+kubectl apply -f prometheus-example-app.yaml
 
 # Create a simple Prometheus config ConfigMap
 cat > example-prometheus-config.yaml << EOF
@@ -68,7 +69,9 @@ data:
     global:
       scrape_interval: 15s
     scrape_configs:
+EOF
 kubectl apply -f prometheus-example-app.yaml
+
   
 
 
@@ -93,6 +96,7 @@ spec:
     path: /metrics
     interval: 15s
 EOF
+
 kubectl apply -f example-app-servicemonitor.yaml
 
 ## LOAD GENERATOR -- Create a new load generator
@@ -123,6 +127,7 @@ spec:
       restartPolicy: Never
   backoffLimit: 4
 EOF
+
 kubectl apply -f new-load-generator.yaml
 
 
