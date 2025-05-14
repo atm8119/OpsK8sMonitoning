@@ -57,4 +57,5 @@ spec:
 EOF
 kubectl apply -f prometheus-ingress.yaml
 
-
+## For port forwarding to the VM for access to Prometheus UI on port 9090
+# kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-prometheus 9090
