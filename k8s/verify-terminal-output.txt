@@ -1,0 +1,382 @@
+## EXPECTED TERMINAL OUTPUTS:
+
+# --------------------------------------------------------------------------
+# Monitoring Namespace
+root@Ubuntu-0152:~# k get -n monitoring svc,deployments,po,ServiceMonitors,Secrets,ConfigMaps,ServiceAccounts
+NAME                                              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+service/alertmanager-operated                     ClusterIP   None            <none>        9093/TCP,9094/TCP,9094/UDP   2d4h
+service/prometheus-external                       NodePort    10.43.114.98    <none>        9090:30090/TCP               28h
+service/prometheus-grafana                        ClusterIP   10.43.18.162    <none>        80/TCP                       2d4h
+service/prometheus-kube-prometheus-alertmanager   ClusterIP   10.43.201.218   <none>        9093/TCP,8080/TCP            2d4h
+service/prometheus-kube-prometheus-operator       ClusterIP   10.43.175.232   <none>        443/TCP                      2d4h
+service/prometheus-kube-prometheus-prometheus     ClusterIP   10.43.93.134    <none>        9090/TCP,8080/TCP            2d4h
+service/prometheus-kube-state-metrics             ClusterIP   10.43.223.109   <none>        8080/TCP                     2d4h
+service/prometheus-operated                       ClusterIP   None            <none>        9090/TCP                     2d4h
+service/prometheus-prometheus-node-exporter       ClusterIP   10.43.222.127   <none>        9100/TCP                     2d4h
+
+NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/prometheus-grafana                    1/1     1            1           2d4h
+deployment.apps/prometheus-kube-prometheus-operator   1/1     1            1           2d4h
+deployment.apps/prometheus-kube-state-metrics         1/1     1            1           2d4h
+
+NAME                                                         READY   STATUS             RESTARTS        AGE
+pod/alertmanager-prometheus-kube-prometheus-alertmanager-0   2/2     Running            2 (29h ago)     2d4h
+pod/prometheus-grafana-77bcfb9bdb-882ks                      3/3     Running            3 (29h ago)     2d4h
+pod/prometheus-kube-prometheus-operator-759b554bdb-459xg     1/1     Running            2 (129m ago)    2d4h
+pod/prometheus-kube-state-metrics-7457555cf7-mnf5p           1/1     Running            1 (29h ago)     2d4h
+pod/prometheus-prometheus-kube-prometheus-prometheus-0       2/2     Running            2 (29h ago)     2d4h
+pod/prometheus-prometheus-node-exporter-lzh89                1/1     Running            1 (29h ago)     2d4h
+pod/test                                                     0/1     CrashLoopBackOff   273 (78s ago)   22h
+
+NAME                                                                                      AGE
+servicemonitor.monitoring.coreos.com/prometheus-example-app                               27h
+servicemonitor.monitoring.coreos.com/prometheus-grafana                                   2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-alertmanager              2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-apiserver                 2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-coredns                   2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-controller-manager   2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-etcd                 2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-proxy                2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-scheduler            2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kubelet                   2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-operator                  2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-prometheus                2d4h
+servicemonitor.monitoring.coreos.com/prometheus-kube-state-metrics                        2d4h
+servicemonitor.monitoring.coreos.com/prometheus-prometheus-node-exporter                  2d4h
+
+NAME                                                                                         TYPE                                  DATA   AGE
+secret/alertmanager-prometheus-kube-prometheus-alertmanager                                  Opaque                                1      2d4h
+secret/alertmanager-prometheus-kube-prometheus-alertmanager-cluster-tls-config               Opaque                                1      2d4h
+secret/alertmanager-prometheus-kube-prometheus-alertmanager-generated                        Opaque                                1      2d4h
+secret/alertmanager-prometheus-kube-prometheus-alertmanager-tls-assets-0                     Opaque                                0      2d4h
+secret/alertmanager-prometheus-kube-prometheus-alertmanager-web-config                       Opaque                                1      2d4h
+secret/prometheus-grafana                                                                    Opaque                                3      2d4h
+secret/prometheus-kube-prometheus-admission                                                  Opaque                                3      2d4h
+secret/prometheus-prometheus-kube-prometheus-prometheus                                      Opaque                                1      2d4h
+secret/prometheus-prometheus-kube-prometheus-prometheus-thanos-prometheus-http-client-file   Opaque                                1      2d4h
+secret/prometheus-prometheus-kube-prometheus-prometheus-tls-assets-0                         Opaque                                1      2d4h
+secret/prometheus-prometheus-kube-prometheus-prometheus-web-config                           Opaque                                1      2d4h
+secret/prometheususer-token                                                                  kubernetes.io/service-account-token   3      16h
+secret/sh.helm.release.v1.prometheus.v1                                                      helm.sh/release.v1                    1      2d4h
+
+NAME                                                                     DATA   AGE
+configmap/kube-root-ca.crt                                               1      2d4h
+configmap/prometheus-grafana                                             1      2d4h
+configmap/prometheus-grafana-config-dashboards                           1      2d4h
+configmap/prometheus-kube-prometheus-alertmanager-overview               1      2d4h
+configmap/prometheus-kube-prometheus-apiserver                           1      2d4h
+configmap/prometheus-kube-prometheus-cluster-total                       1      2d4h
+configmap/prometheus-kube-prometheus-controller-manager                  1      2d4h
+configmap/prometheus-kube-prometheus-etcd                                1      2d4h
+configmap/prometheus-kube-prometheus-grafana-datasource                  1      2d4h
+configmap/prometheus-kube-prometheus-grafana-overview                    1      2d4h
+configmap/prometheus-kube-prometheus-k8s-coredns                         1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-cluster               1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-multicluster          1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-namespace             1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-node                  1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-pod                   1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-workload              1      2d4h
+configmap/prometheus-kube-prometheus-k8s-resources-workloads-namespace   1      2d4h
+configmap/prometheus-kube-prometheus-kubelet                             1      2d4h
+configmap/prometheus-kube-prometheus-namespace-by-pod                    1      2d4h
+configmap/prometheus-kube-prometheus-namespace-by-workload               1      2d4h
+configmap/prometheus-kube-prometheus-node-cluster-rsrc-use               1      2d4h
+configmap/prometheus-kube-prometheus-node-rsrc-use                       1      2d4h
+configmap/prometheus-kube-prometheus-nodes                               1      2d4h
+configmap/prometheus-kube-prometheus-nodes-aix                           1      2d4h
+configmap/prometheus-kube-prometheus-nodes-darwin                        1      2d4h
+configmap/prometheus-kube-prometheus-persistentvolumesusage              1      2d4h
+configmap/prometheus-kube-prometheus-pod-total                           1      2d4h
+configmap/prometheus-kube-prometheus-prometheus                          1      2d4h
+configmap/prometheus-kube-prometheus-proxy                               1      2d4h
+configmap/prometheus-kube-prometheus-scheduler                           1      2d4h
+configmap/prometheus-kube-prometheus-workload-total                      1      2d4h
+configmap/prometheus-prometheus-kube-prometheus-prometheus-rulefiles-0   35     2d4h
+
+NAME                                                     SECRETS   AGE
+serviceaccount/default                                   0         2d4h
+serviceaccount/prometheus-grafana                        0         2d4h
+serviceaccount/prometheus-kube-prometheus-alertmanager   0         2d4h
+serviceaccount/prometheus-kube-prometheus-operator       0         2d4h
+serviceaccount/prometheus-kube-prometheus-prometheus     0         2d4h
+serviceaccount/prometheus-kube-state-metrics             0         2d4h
+serviceaccount/prometheus-prometheus-node-exporter       0         2d4h
+serviceaccount/prometheususer                            0         16h
+
+# --------------------------------------------------------------------------
+# Test-App Namespace
+root@Ubuntu-0152:~# k get -n test-app svc,deployments,po,ServiceMonitors,Secrets,ConfigMaps,ServiceAccounts
+NAME                             TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+service/prometheus-example-app   ClusterIP   10.43.86.28   <none>        8080/TCP   27h
+
+NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/prometheus-example-app   2/2     2            2           27h
+
+NAME                                          READY   STATUS    RESTARTS   AGE
+pod/new-load-generator-wccvj                  1/1     Running   0          27h
+pod/prometheus-example-app-54479854dc-kr9p9   1/1     Running   0          27h
+pod/prometheus-example-app-54479854dc-p8hkz   1/1     Running   0          27h
+
+NAME                                  DATA   AGE
+configmap/example-prometheus-config   1      27h
+configmap/kube-root-ca.crt            1      28h
+
+NAME                     SECRETS   AGE
+serviceaccount/default   0         28h
+
+
+# --------------------------------------------------------------------------
+# Kube-System Namespace
+root@Ubuntu-0152:~# k get -n kube-system svc,deployments,po,ServiceMonitors,Secrets,ConfigMaps,ServiceAccounts
+NAME                                                         TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)                        AGE
+service/kube-dns                                             ClusterIP      10.43.0.10     <none>           53/UDP,53/TCP,9153/TCP         2d4h
+service/kubelet-external                                     NodePort       10.43.237.22   <none>           10250:30250/TCP                22h
+service/metrics-server                                       ClusterIP      10.43.23.18    <none>           443/TCP                        2d4h
+service/prometheus-kube-prometheus-coredns                   ClusterIP      None           <none>           9153/TCP                       2d4h
+service/prometheus-kube-prometheus-kube-controller-manager   ClusterIP      None           <none>           10257/TCP                      2d4h
+service/prometheus-kube-prometheus-kube-etcd                 ClusterIP      None           <none>           2381/TCP                       2d4h
+service/prometheus-kube-prometheus-kube-proxy                ClusterIP      None           <none>           10249/TCP                      2d4h
+service/prometheus-kube-prometheus-kube-scheduler            ClusterIP      None           <none>           10259/TCP                      2d4h
+service/prometheus-kube-prometheus-kubelet                   ClusterIP      None           <none>           10250/TCP,10255/TCP,4194/TCP   2d4h
+service/traefik                                              LoadBalancer   10.43.52.194   10.200.100.102   80:32268/TCP,443:32237/TCP     2d4h
+
+NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/coredns                  1/1     1            1           2d4h
+deployment.apps/local-path-provisioner   1/1     1            1           2d4h
+deployment.apps/metrics-server           1/1     1            1           2d4h
+deployment.apps/traefik                  1/1     1            1           2d4h
+
+NAME                                          READY   STATUS      RESTARTS      AGE
+pod/coredns-697968c856-trl5w                  1/1     Running     1 (29h ago)   2d4h
+pod/helm-install-traefik-crd-kwn2m            0/1     Completed   0             2d4h
+pod/helm-install-traefik-jvh9x                0/1     Completed   1             2d4h
+pod/local-path-provisioner-774c6665dc-sb7v8   1/1     Running     1 (29h ago)   2d4h
+pod/metrics-server-6f4c6675d5-f58ds           1/1     Running     1 (29h ago)   2d4h
+pod/svclb-traefik-a3e41b5e-l942s              2/2     Running     2 (29h ago)   2d4h
+pod/traefik-c98fdf6fb-5cf9f                   1/1     Running     1 (29h ago)   2d4h
+
+NAME                                       TYPE                                  DATA   AGE
+secret/chart-values-traefik                helmcharts.helm.cattle.io/values      1      2d4h
+secret/chart-values-traefik-crd            helmcharts.helm.cattle.io/values      0      2d4h
+secret/k3s-serving                         kubernetes.io/tls                     2      2d4h
+secret/sh.helm.release.v1.traefik-crd.v1   helm.sh/release.v1                    1      2d4h
+secret/sh.helm.release.v1.traefik.v1       helm.sh/release.v1                    1      2d4h
+secret/ubuntu-0152.node-password.k3s       Opaque                                1      2d4h
+secret/vcf-operations-token                kubernetes.io/service-account-token   3      15h
+
+NAME                                                             DATA   AGE
+configmap/chart-content-traefik                                  0      2d4h
+configmap/chart-content-traefik-crd                              0      2d4h
+configmap/cluster-dns                                            2      2d4h
+configmap/coredns                                                2      2d4h
+configmap/extension-apiserver-authentication                     6      2d4h
+configmap/kube-apiserver-legacy-service-account-token-tracking   1      2d4h
+configmap/kube-root-ca.crt                                       1      2d4h
+configmap/local-path-config                                      4      2d4h
+
+NAME                                                         SECRETS   AGE
+serviceaccount/attachdetach-controller                       0         2d4h
+serviceaccount/certificate-controller                        0         2d4h
+serviceaccount/clusterrole-aggregation-controller            0         2d4h
+serviceaccount/coredns                                       0         2d4h
+serviceaccount/cronjob-controller                            0         2d4h
+serviceaccount/daemon-set-controller                         0         2d4h
+serviceaccount/default                                       0         2d4h
+serviceaccount/deployment-controller                         0         2d4h
+serviceaccount/disruption-controller                         0         2d4h
+serviceaccount/endpoint-controller                           0         2d4h
+serviceaccount/endpointslice-controller                      0         2d4h
+serviceaccount/endpointslicemirroring-controller             0         2d4h
+serviceaccount/ephemeral-volume-controller                   0         2d4h
+serviceaccount/expand-controller                             0         2d4h
+serviceaccount/generic-garbage-collector                     0         2d4h
+serviceaccount/helm-traefik                                  0         2d4h
+serviceaccount/helm-traefik-crd                              0         2d4h
+serviceaccount/horizontal-pod-autoscaler                     0         2d4h
+serviceaccount/job-controller                                0         2d4h
+serviceaccount/kubelet-metrics-viewer                        0         22h
+serviceaccount/legacy-service-account-token-cleaner          0         2d4h
+serviceaccount/local-path-provisioner-service-account        0         2d4h
+serviceaccount/metrics-server                                0         2d4h
+serviceaccount/namespace-controller                          0         2d4h
+serviceaccount/node-controller                               0         2d4h
+serviceaccount/persistent-volume-binder                      0         2d4h
+serviceaccount/pod-garbage-collector                         0         2d4h
+serviceaccount/pv-protection-controller                      0         2d4h
+serviceaccount/pvc-protection-controller                     0         2d4h
+serviceaccount/replicaset-controller                         0         2d4h
+serviceaccount/replication-controller                        0         2d4h
+serviceaccount/resourcequota-controller                      0         2d4h
+serviceaccount/root-ca-cert-publisher                        0         2d4h
+serviceaccount/service-account-controller                    0         2d4h
+serviceaccount/statefulset-controller                        0         2d4h
+serviceaccount/svclb                                         0         2d4h
+serviceaccount/token-cleaner                                 0         2d4h
+serviceaccount/traefik                                       0         2d4h
+serviceaccount/ttl-after-finished-controller                 0         2d4h
+serviceaccount/ttl-controller                                0         2d4h
+serviceaccount/validatingadmissionpolicy-status-controller   0         2d4h
+serviceaccount/vcf-operations-sa                             0         15h
+
+
+# --------------------------------------------------------------------------
+# Cluster-Wide Roles and Bindings
+
+root@Ubuntu-0152:~# k get ClusterRoles,ClusterRoleBindings
+NAME                                                                                                         CREATED AT
+clusterrole.rbac.authorization.k8s.io/admin                                                                  2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/cluster-admin                                                          2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/clustercidrs-node                                                      2025-05-13T16:24:47Z
+clusterrole.rbac.authorization.k8s.io/edit                                                                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/k3s-cloud-controller-manager                                           2025-05-13T16:24:46Z
+clusterrole.rbac.authorization.k8s.io/kubelet-metrics-viewer                                                 2025-05-14T23:04:36Z
+clusterrole.rbac.authorization.k8s.io/local-path-provisioner-role                                            2025-05-13T16:24:46Z
+clusterrole.rbac.authorization.k8s.io/prometheus-grafana-clusterrole                                         2025-05-13T16:26:50Z
+clusterrole.rbac.authorization.k8s.io/prometheus-kube-prometheus-operator                                    2025-05-13T16:26:50Z
+clusterrole.rbac.authorization.k8s.io/prometheus-kube-prometheus-prometheus                                  2025-05-13T16:26:50Z
+clusterrole.rbac.authorization.k8s.io/prometheus-kube-state-metrics                                          2025-05-13T16:26:50Z
+clusterrole.rbac.authorization.k8s.io/system:aggregate-to-admin                                              2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:aggregate-to-edit                                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:aggregate-to-view                                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader                                       2025-05-13T16:24:46Z
+clusterrole.rbac.authorization.k8s.io/system:auth-delegator                                                  2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:basic-user                                                      2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:certificatesigningrequests:nodeclient       2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:certificatesigningrequests:selfnodeclient   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:kube-apiserver-client-approver              2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:kube-apiserver-client-kubelet-approver      2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:kubelet-serving-approver                    2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:certificates.k8s.io:legacy-unknown-approver                     2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:attachdetach-controller                              2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:certificate-controller                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:clusterrole-aggregation-controller                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:cronjob-controller                                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:daemon-set-controller                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:deployment-controller                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:disruption-controller                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:endpoint-controller                                  2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:endpointslice-controller                             2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:endpointslicemirroring-controller                    2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:ephemeral-volume-controller                          2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:expand-controller                                    2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:generic-garbage-collector                            2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:horizontal-pod-autoscaler                            2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:job-controller                                       2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:legacy-service-account-token-cleaner                 2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:namespace-controller                                 2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:node-controller                                      2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:persistent-volume-binder                             2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:pod-garbage-collector                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:pv-protection-controller                             2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:pvc-protection-controller                            2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:replicaset-controller                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:replication-controller                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:resourcequota-controller                             2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:root-ca-cert-publisher                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:route-controller                                     2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:service-account-controller                           2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:service-controller                                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:statefulset-controller                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:ttl-after-finished-controller                        2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:ttl-controller                                       2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:controller:validatingadmissionpolicy-status-controller          2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:coredns                                                         2025-05-13T16:24:46Z
+clusterrole.rbac.authorization.k8s.io/system:discovery                                                       2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:heapster                                                        2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:k3s-controller                                                  2025-05-13T16:24:47Z
+clusterrole.rbac.authorization.k8s.io/system:kube-aggregator                                                 2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:kube-controller-manager                                         2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:kube-dns                                                        2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:kube-scheduler                                                  2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:kubelet-api-admin                                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:metrics-server                                                  2025-05-13T16:24:47Z
+clusterrole.rbac.authorization.k8s.io/system:monitoring                                                      2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:node                                                            2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:node-bootstrapper                                               2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:node-problem-detector                                           2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:node-proxier                                                    2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:persistent-volume-provisioner                                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:public-info-viewer                                              2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:service-account-issuer-discovery                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/system:volume-scheduler                                                2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/traefik-kube-system                                                    2025-05-13T16:25:09Z
+clusterrole.rbac.authorization.k8s.io/view                                                                   2025-05-13T16:24:41Z
+clusterrole.rbac.authorization.k8s.io/vmware-monitoring-all-groups                                           2025-05-15T20:03:13Z
+clusterrole.rbac.authorization.k8s.io/vmware-monitoring-basic                                                2025-05-15T20:00:03Z
+clusterrole.rbac.authorization.k8s.io/vmware-monitoring-comprehensive                                        2025-05-15T20:01:43Z
+clusterrole.rbac.authorization.k8s.io/vmware-monitoring-with-status                                          2025-05-15T20:04:35Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-almost-admin                                                2025-05-15T20:25:29Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-base                                                        2025-05-15T20:34:22Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-node-proxy                                                  2025-05-15T20:25:13Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-nonresource                                                 2025-05-15T20:24:49Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-test-a                                                      2025-05-15T20:34:36Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-test-b                                                      2025-05-15T20:34:59Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-troubleshoot                                                2025-05-15T20:21:21Z
+clusterrole.rbac.authorization.k8s.io/vmware-ops-write-test                                                  2025-05-15T20:24:32Z
+
+NAME                                                                                                         ROLE                                                                        AGE
+clusterrolebinding.rbac.authorization.k8s.io/cluster-admin                                                   ClusterRole/cluster-admin                                                   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/clustercidrs-node                                               ClusterRole/clustercidrs-node                                               2d4h
+clusterrolebinding.rbac.authorization.k8s.io/helm-kube-system-traefik                                        ClusterRole/cluster-admin                                                   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/helm-kube-system-traefik-crd                                    ClusterRole/cluster-admin                                                   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/k3s-cloud-controller-manager                                    ClusterRole/k3s-cloud-controller-manager                                    2d4h
+clusterrolebinding.rbac.authorization.k8s.io/k3s-cloud-controller-manager-auth-delegator                     ClusterRole/system:auth-delegator                                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/kube-apiserver-kubelet-admin                                    ClusterRole/system:kubelet-api-admin                                        2d4h
+clusterrolebinding.rbac.authorization.k8s.io/kubelet-metrics-viewer                                          ClusterRole/kubelet-metrics-viewer                                          22h
+clusterrolebinding.rbac.authorization.k8s.io/local-path-provisioner-bind                                     ClusterRole/local-path-provisioner-role                                     2d4h
+clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator                            ClusterRole/system:auth-delegator                                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-grafana-clusterrolebinding                           ClusterRole/prometheus-grafana-clusterrole                                  2d4h
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-kube-prometheus-operator                             ClusterRole/prometheus-kube-prometheus-operator                             2d4h
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-kube-prometheus-prometheus                           ClusterRole/prometheus-kube-prometheus-prometheus                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-kube-state-metrics                                   ClusterRole/prometheus-kube-state-metrics                                   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/prometheus-viewer                                               ClusterRole/view                                                            16h
+clusterrolebinding.rbac.authorization.k8s.io/system:basic-user                                               ClusterRole/system:basic-user                                               2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:attachdetach-controller                       ClusterRole/system:controller:attachdetach-controller                       2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:certificate-controller                        ClusterRole/system:controller:certificate-controller                        2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:clusterrole-aggregation-controller            ClusterRole/system:controller:clusterrole-aggregation-controller            2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:cronjob-controller                            ClusterRole/system:controller:cronjob-controller                            2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:daemon-set-controller                         ClusterRole/system:controller:daemon-set-controller                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:deployment-controller                         ClusterRole/system:controller:deployment-controller                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:disruption-controller                         ClusterRole/system:controller:disruption-controller                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:endpoint-controller                           ClusterRole/system:controller:endpoint-controller                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:endpointslice-controller                      ClusterRole/system:controller:endpointslice-controller                      2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:endpointslicemirroring-controller             ClusterRole/system:controller:endpointslicemirroring-controller             2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:ephemeral-volume-controller                   ClusterRole/system:controller:ephemeral-volume-controller                   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:expand-controller                             ClusterRole/system:controller:expand-controller                             2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:generic-garbage-collector                     ClusterRole/system:controller:generic-garbage-collector                     2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:horizontal-pod-autoscaler                     ClusterRole/system:controller:horizontal-pod-autoscaler                     2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:job-controller                                ClusterRole/system:controller:job-controller                                2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:legacy-service-account-token-cleaner          ClusterRole/system:controller:legacy-service-account-token-cleaner          2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:namespace-controller                          ClusterRole/system:controller:namespace-controller                          2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:node-controller                               ClusterRole/system:controller:node-controller                               2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:persistent-volume-binder                      ClusterRole/system:controller:persistent-volume-binder                      2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:pod-garbage-collector                         ClusterRole/system:controller:pod-garbage-collector                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:pv-protection-controller                      ClusterRole/system:controller:pv-protection-controller                      2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:pvc-protection-controller                     ClusterRole/system:controller:pvc-protection-controller                     2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:replicaset-controller                         ClusterRole/system:controller:replicaset-controller                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:replication-controller                        ClusterRole/system:controller:replication-controller                        2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:resourcequota-controller                      ClusterRole/system:controller:resourcequota-controller                      2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:root-ca-cert-publisher                        ClusterRole/system:controller:root-ca-cert-publisher                        2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:route-controller                              ClusterRole/system:controller:route-controller                              2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:service-account-controller                    ClusterRole/system:controller:service-account-controller                    2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:service-controller                            ClusterRole/system:controller:service-controller                            2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:statefulset-controller                        ClusterRole/system:controller:statefulset-controller                        2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:ttl-after-finished-controller                 ClusterRole/system:controller:ttl-after-finished-controller                 2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:ttl-controller                                ClusterRole/system:controller:ttl-controller                                2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:controller:validatingadmissionpolicy-status-controller   ClusterRole/system:controller:validatingadmissionpolicy-status-controller   2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:coredns                                                  ClusterRole/system:coredns                                                  2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:discovery                                                ClusterRole/system:discovery                                                2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:k3s-controller                                           ClusterRole/system:k3s-controller                                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:kube-controller-manager                                  ClusterRole/system:kube-controller-manager                                  2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:kube-dns                                                 ClusterRole/system:kube-dns                                                 2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:kube-scheduler                                           ClusterRole/system:kube-scheduler                                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server                                           ClusterRole/system:metrics-server                                           2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:monitoring                                               ClusterRole/system:monitoring                                               2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:node                                                     ClusterRole/system:node                                                     2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:node-proxier                                             ClusterRole/system:node-proxier                                             2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:public-info-viewer                                       ClusterRole/system:public-info-viewer                                       2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:service-account-issuer-discovery                         ClusterRole/system:service-account-issuer-discovery                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/system:volume-scheduler                                         ClusterRole/system:volume-scheduler                                         2d4h
+clusterrolebinding.rbac.authorization.k8s.io/traefik-kube-system                                             ClusterRole/traefik-kube-system                                             2d4h
+clusterrolebinding.rbac.authorization.k8s.io/vcf-ops-test-a                                                  ClusterRole/vmware-ops-test-a                                               34m
