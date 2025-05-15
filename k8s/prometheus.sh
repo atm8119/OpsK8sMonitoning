@@ -57,5 +57,9 @@ spec:
 EOF
 kubectl apply -f prometheus-ingress.yaml
 
-## For port forwarding to the VM for access to Prometheus UI on port 9090
+## NOTE ON AUTH
+# No authentication is added for Prometheus through these steps by default.
+# If Prometheus is configured to use a Username|Password for authentication (or, for OpenShift, a Bearer Token) these would need to also be added when configuring the VCF Operations adapter for Kubernetes.
+
+## ACCESSING PROMETHEUS UI: For port forwarding to the VM for access to Prometheus UI on port 9090
 # kubectl port-forward -n monitoring svc/prometheus-kube-prometheus-prometheus 9090
