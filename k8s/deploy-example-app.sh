@@ -70,7 +70,7 @@ data:
       scrape_interval: 15s
     scrape_configs:
 EOF
-kubectl apply -f prometheus-example-app.yaml
+kubectl apply -f example-prometheus-config.yaml
 
   
 
