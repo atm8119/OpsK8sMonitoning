@@ -16,6 +16,19 @@ sudo systemctl status k3s
 # Verify k3s is running
 sudo k3s kubectl get nodes
 
+# -------------------------------------------
+# -- Add K3s config to Root's ~/.kube/config
+# -------------------------------------------
+
+# Create .kube directory for root
+mkdir -p ~/.kube
+
+# Copy k3s config to standard kubectl location
+cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+
+# Verify the config points to the correct server
+cat ~/.kube/config | grep server:
+# Should show: server: https://127.0.0.1:6443
 
 
 # ---------------------------------------
