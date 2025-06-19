@@ -1,0 +1,34 @@
+# ---------------------------------------
+# -- Switch to Root User (if not already)
+# ---------------------------------------
+sudo passwd root
+su -
+
+# ----------------------------
+# -- Install & Verify K3s
+# ----------------------------
+# Download and install k3s (latest stable)
+curl -sfL https://get.k3s.io | sh -
+
+# Check installation status
+sudo systemctl status k3s
+
+# Verify k3s is running
+sudo k3s kubectl get nodes
+
+
+
+# ---------------------------------------
+# -- Enable Connection via Needed Ports
+# ---------------------------------------
+# Allow k3s API server
+sudo ufw allow 6443/tcp
+
+# Allow Prometheus NodePort
+sudo ufw allow 30090/tcp
+
+# Allow kubelet API (if Aria Ops needs it)
+sudo ufw allow 10250/tcp
+
+# Reload firewall
+sudo ufw reload
