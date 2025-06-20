@@ -40,8 +40,5 @@ sudo ufw allow 6443/tcp
 # Allow Prometheus NodePort
 sudo ufw allow 30090/tcp
 
-# Allow kubelet API (if Aria Ops needs it)
-sudo ufw allow 10250/tcp
-
 # Reload firewall
 sudo ufw reload
